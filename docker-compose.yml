@@ -1,0 +1,26 @@
+# For local development only.
+
+version: '3'
+
+services:
+  vokuro:
+    container_name: vokuro
+    hostname: vokuro
+    build: docker
+    working_dir: /srv
+    volumes:
+      - .:/srv
+    ports:
+      - "81:80"
+
+  mysql:
+    container_name: vokuro-mysql
+    hostname: vokuro-mysql
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_USER=phalcon
+      - MYSQL_DATABASE=phalcon_vokuro
+      - MYSQL_PASSWORD=secret
+    ports:
+      - "3307:3306"
